@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../common/head.ejs') %>
+  <body
+    style="
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+    "
+  >
+    <%- include('../common/navbar.ejs') %>
+
+    <!-- Flash Messages -->
+    <% if (sucess && sucess != '') { %>
+    <div
+      class="alert alert-success"
+      role="alert"
+      style="
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        text-align: center;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+      "
+    >
+      <%= sucess %>
+    </div>
+    <% } else if (err && err != '') { %>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      style="
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        text-align: center;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+      "
+    >
+      <%= err %>
+    </div>
+    <% } %>
+
+    <!-- Product Section Start -->
+    <div class="container-xxl py-5" style="max-width: 1200px; margin: auto">
+      <div class="container">
+        <div class="row g-4">
+          <% products.slice(0, products.length).reverse().forEach((value) => {
+          %>
+          <div
+            class="col-lg-4 col-md-6 wow fadeInUp"
+            data-wow-delay="0.1s"
+            style="height: 500px; display: flex; align-items: stretch"
+          >
+            <div
+              class="service-item text-center pt-3"
+              style="
+                background-color: #ffffff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-top: 30px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              "
+            >
+              <div class="p-4">
+                <img
+                  src="http://localhost:3004/<%= value.image %>"
+                  alt="<%= value.p_name %>"
+                  class="img-fluid mb-3"
+                  style="
+                    width: 100%;
+                    height: 200px;
+                    border-radius: 8px;
+                    object-fit: cover;
+                  "
+                />
+                <h5 class="mb-3" style="font-size: 1.2em; color: #333">
+                  <%= value.p_name %>
+                </h5>
+                <p style="font-size: 1em; color: #666; margin-bottom: 10px">
+                  <strong>Brand:</strong> <%= value.brand_name %>
+                </p>
+                <p style="font-size: 0.9em; color: #777; margin-bottom: 5px">
+                  <strong>Color:</strong> <%= value.p_color %>
+                </p>
+                <p style="font-size: 0.9em; color: #777; margin-bottom: 15px">
+                  <strong>Size:</strong> <%= value.p_size %>
+                </p>
+
+                <div style="display: flex; justify-content: center; gap: 10px">
+                  <% if (user && user.role === 'admin'){ %>
+
+                  <p style="font-size: 0.9em; color: #777; margin-bottom: 15px">
+                    <strong>Active status:</strong> <%= value.active %>
+                  </p>
+
+                  <!-- Edit Button -->
+                  <a
+                    href="/singleproductget/<%= value._id %>"
+                    style="display: inline"
+                  >
+                    <button
+                      style="
+                        padding: 8px 15px;
+                        font-size: 0.9em;
+                        color: #fff;
+                        background-color: #ffc107;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                      "
+                      onmouseover="this.style.backgroundColor='#e0a800';"
+                      onmouseout="this.style.backgroundColor='#ffc107';"
+                    >
+                      Edit
+                    </button>
+                  </a>
+
+                  <!-- Delete product -->
+                  <a
+                    href="/deleteproductget/<%= value._id %>"
+                    style="display: inline"
+                  >
+                    <button
+                      style="
+                        padding: 8px 15px;
+                        font-size: 0.9em;
+                        color: #fff;
+                        background-color: #dc3545;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                      "
+                      onmouseover="this.style.backgroundColor='#c82333';"
+                      onmouseout="this.style.backgroundColor='#dc3545';"
+                    >
+                      Delete
+                    </button>
+                  </a>
+
+                  <% } %>
+                </div>
+                <!-- End of Action Buttons -->
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+    <!-- Product Section End -->
+
+    <%- include('../common/footer.ejs') %>
+  </body>
+</html>

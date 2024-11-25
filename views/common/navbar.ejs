@@ -1,0 +1,142 @@
+<nav
+  class="navbar navbar-expand-lg"
+  style="
+    background-color: #4a4a8c;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  "
+>
+  <!-- Brand -->
+  <a
+    class="navbar-brand"
+    href="#"
+    style="
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 24px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    "
+    >MyBrand</a
+  >
+
+  <!-- Toggle Button for Mobile View -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    style="
+      border: none;
+      background-color: #ffffff;
+      padding: 6px;
+      border-radius: 4px;
+    "
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar Links -->
+  <div
+    class="collapse navbar-collapse"
+    id="navbarNavDropdown"
+    style="justify-content: flex-end"
+  >
+    <ul class="navbar-nav">
+      <!-- Home link (always visible) -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Home</a
+        >
+      </li>
+
+      <% if (user && user.role === 'admin') { %>
+      <!-- Admin-specific links -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/addproduct"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Add Product</a
+        >
+      </li>
+      <% } %>
+
+      <!-- Product List (visible to all users) -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/product"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Product List</a
+        >
+      </li>
+
+      <% if (!user) { %>
+      <!-- Login link (visible when user is not logged in) -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/login"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Login</a
+        >
+      </li>
+      <% } else { %>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Profile : <%= user.name %></a
+        >
+      </li>
+      <!-- Logout link (visible when user is logged in) -->
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/logout"
+          style="
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+          "
+          >Logout</a
+        >
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
