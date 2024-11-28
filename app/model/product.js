@@ -40,8 +40,8 @@ const ProductSchema = new Schema({
         minlength: [3, 'Brand must be at least 3 characters']
     },
     active: {
-        type: String,
-        enum: ['true', 'false']
+        type: Boolean,
+        default: false
     },
 }, { timestamps: true });
 

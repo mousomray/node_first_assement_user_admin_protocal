@@ -104,9 +104,13 @@
                 <div style="display: flex; justify-content: center; gap: 10px">
                   <% if (user && user.role === 'admin'){ %>
 
-                  <p style="font-size: 0.9em; color: #777; margin-bottom: 15px">
-                    <strong>Active status:</strong> <%= value.active %>
-                  </p>
+                  <!-- Toggle Active Button -->
+                  <a
+                    href="/toggleblogactive/<%= value._id %>"
+                    style="background-color: <%= value.active ? 'red' : 'green' %>; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; margin-left: 5px;"
+                  >
+                    <%= value.active ? 'Deactivate' : 'Activate' %>
+                  </a>
 
                   <!-- Edit Button -->
                   <a
